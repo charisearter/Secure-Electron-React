@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
 // Check to see if in Development mode
@@ -42,7 +42,7 @@ app.whenReady().then(createWindow);
 
 // Quit all windows, except on macOS
 app.on('window-all-closed', () => {
-	if (process.platform !== darwin) {
+	if (process.platform !== 'darwin') {
 		app.quit();
 	}
 });
@@ -54,3 +54,9 @@ app.on('activate', () => {
 });
 
 // IPC events here
+
+// Say Hello
+ipcMain.handle('say-hello', (_, args) => {
+	console.log(args);
+	return `Hello from Main. This is app version ${app.getVersion()}.`;
+});

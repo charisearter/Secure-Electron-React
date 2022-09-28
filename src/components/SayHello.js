@@ -1,10 +1,12 @@
 import React from 'react';
 
-function SayHello() {
+function SayHello({ getGreeting }) {
 	return (
-		<div>
-			<h2> This is the Say Hello component!</h2>
-		</div>
+		<section>
+			<h2> Say Hello - appears in Electron console</h2>
+			<button onClick={getGreeting}>Greet</button>
+			<hr />
+		</section>
 	);
 }
 
