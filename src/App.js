@@ -8,10 +8,10 @@ function App() {
 	const [msg, setMsg] = useState('Initial message');
 	const [filePath, setFilePath] = useState([]);
 
-	// Say Hello
+	// Say Hello -  uses invoke
 	const getGreeting = async () => {
-		const greet = await api.invoke('say-hello', 'This is a greeting: Hi!');
-		console.log(greet);
+		await api.invoke('say-hello', 'This is another greeting: Sup!');
+		console.log('Sent to Main - appears in Electron console');
 	};
 
 	// Send Message - IPC renderer -> main
