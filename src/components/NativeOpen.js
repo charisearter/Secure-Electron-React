@@ -1,9 +1,13 @@
 import React from 'react';
 
-function NativeOpen() {
+function NativeOpen({ fileOpen, filePath }) {
 	return (
 		<div>
-			<h2>Native Open stuff here</h2>
+			<h2>Open File and Show Path - Native</h2>
+			<button onClick={fileOpen}>Open a file</button>
+			<p>
+				File path: <strong> {filePath} </strong>
+			</p>
 		</div>
 	);
 }

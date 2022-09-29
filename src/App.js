@@ -8,16 +8,15 @@ function App() {
 	const [msg, setMsg] = useState('Initial message');
 	const [filePath, setFilePath] = useState([]);
 
-	// Say Hello -  uses invoke
+	// One-Way: Say Hello -  IPC renderer -> main
 	const getGreeting = async () => {
 		await api.invoke('say-hello', 'This is another greeting: Sup!');
 		console.log('Sent to Main - appears in Electron console');
 	};
 
-	// Send Message - IPC renderer -> main
+	// Two-Way: Send Message - IPC renderer -> main --> renderer
 	const sendMessage = () => {
-		window.api.send(msg);
-		setMsg('');
+		window.api.send('message', msg);
 	};
 
 	const onMsgChange = e => {
@@ -26,8 +25,9 @@ function App() {
 	};
 
 	// Show Dialog - Naive Open file
-	const nativeFileOpen = async () => {
-		const thePath = await window.api.nativeOpenFile();
+	const fileOpen = async () => {
+		const thePath = await window.api.openNativeFile();
+		console.log(thePath);
 		setFilePath(thePath);
 	};
 
@@ -35,8 +35,12 @@ function App() {
 		<section>
 			<h1> This is the App component </h1>
 			<SayHello getGreeting={getGreeting} />
-			<SendMessage sendMessage={sendMessage} onMsgChange={onMsgChange} />
-			<NativeOpen />
+			<SendMessage
+				sendMessage={sendMessage}
+				onMsgChange={onMsgChange}
+				msg={msg}
+			/>
+			<NativeOpen fileOpen={fileOpen} filePath={filePath} />
 		</section>
 	);
 }

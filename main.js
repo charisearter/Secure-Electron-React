@@ -7,6 +7,16 @@ const isDev = !app.isPackaged;
 // make a global variable so it won't be garbage collected
 let mainWindow;
 
+// Show Dialog - Native
+const handleNativeFileOpen = async () => {
+	const { canceled, filePaths } = await dialog.showOpenDialog();
+	if (canceled) {
+		return;
+	} else {
+		return filePaths[0];
+	}
+};
+
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
 		show: false, // don't show until finished loading
@@ -60,3 +70,10 @@ ipcMain.handle('say-hello', (_, args) => {
 	console.log(args);
 	return `Hello from Main. This is app version ${app.getVersion()}.`;
 });
+
+// Send Message
+ipcMain.on('message', (_, args) => {
+	console.log(`The message sent to Main: ${args}`);
+});
+
+ipcMain.handle('dialog:openNativeFile', handleNativeFileOpen);
