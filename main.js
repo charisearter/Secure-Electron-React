@@ -1,4 +1,10 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const {
+	app,
+	BrowserWindow,
+	ipcMain,
+	dialog,
+	Notification,
+} = require('electron');
 const path = require('path');
 
 // Check to see if in Development mode
@@ -76,4 +82,11 @@ ipcMain.on('message', (_, args) => {
 	console.log(`The message sent to Main: ${args}`);
 });
 
+// Open file
 ipcMain.handle('dialog:openNativeFile', handleNativeFileOpen);
+
+// Notification pop up
+ipcMain.on('notify', (_, message) => {
+	console.log(`Notify Main process: ${message}`);
+	new Notification({ title: 'Notification Test', body: message }).show();
+});

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import SayHello from './components/SayHello';
 import SendMessage from './components/SendMessage';
 import NativeOpen from './components/NativeOpen';
+import Notify from './components/Notify';
 
 function App() {
 	const [msg, setMsg] = useState('Initial message');
@@ -31,6 +32,11 @@ function App() {
 		setFilePath(thePath);
 	};
 
+	// Notify Pop up
+	const sendNotification = () => {
+		api.send('notify', 'You have been notified!');
+	};
+
 	return (
 		<section>
 			<h1> This is the App component </h1>
@@ -41,6 +47,7 @@ function App() {
 				msg={msg}
 			/>
 			<NativeOpen fileOpen={fileOpen} filePath={filePath} />
+			<Notify sendNotification={sendNotification} />
 		</section>
 	);
 }

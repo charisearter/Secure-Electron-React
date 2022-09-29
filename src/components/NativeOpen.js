@@ -8,6 +8,7 @@ function NativeOpen({ fileOpen, filePath }) {
 			<p>
 				File path: <strong> {filePath} </strong>
 			</p>
+			<hr />
 		</div>
 	);
 }
