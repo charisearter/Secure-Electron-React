@@ -4,6 +4,7 @@ import SayHello from './components/SayHello';
 import SendMessage from './components/SendMessage';
 import NativeOpen from './components/NativeOpen';
 import Notify from './components/Notify';
+import NodeTest from './components/NodeTest';
 
 function App() {
 	const [msg, setMsg] = useState('Initial message');
@@ -23,6 +24,11 @@ function App() {
 	const onMsgChange = e => {
 		e.preventDefault();
 		setMsg(e.target.value);
+	};
+
+	// Node Test
+	const testNode = () => {
+		api.send('nodeTest', `Renderer --> Main set up to test Node`);
 	};
 
 	// Show Dialog - Naive Open file
@@ -48,6 +54,7 @@ function App() {
 			/>
 			<NativeOpen fileOpen={fileOpen} filePath={filePath} />
 			<Notify sendNotification={sendNotification} />
+			<NodeTest testNode={testNode} />
 		</section>
 	);
 }

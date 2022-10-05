@@ -90,3 +90,8 @@ ipcMain.on('notify', (_, message) => {
 	console.log(`Notify Main process: ${message}`);
 	new Notification({ title: 'Notification Test', body: message }).show();
 });
+
+// Node test
+ipcMain.on('nodeTest', (_, args) => {
+	console.log(`Message from Renderer: ${args}`);
+});

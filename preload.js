@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 const API = {
 	// Renderer to Main
 	send: (channel, data) => {
-		let validChannels = ['message', 'notify'];
+		let validChannels = ['message', 'notify', 'nodeTest'];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.send(channel, data);
 		}
