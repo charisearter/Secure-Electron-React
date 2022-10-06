@@ -9,8 +9,7 @@ const path = require('path');
 
 // Node test
 const child_process = require('child_process');
-//const { start } = require('repl');
-//child_process.exec('start cmd.exe');
+
 
 // Check to see if in Development mode
 const isDev = !app.isPackaged;
@@ -28,43 +27,6 @@ const handleNativeFileOpen = async () => {
 	}
 };
 
-// Node test with dialog
-// const run_script = (command, args, callback) => {
-// 	let child = child_process.spawn(command, args, {
-// 		encoding: 'utf8',
-// 		shell: true,
-// 	});
-
-// 	child.on('error', error => {
-// 		dialog.showMessageBox({
-// 			title: 'Warning - There was an error!',
-// 			type: 'warning',
-// 			message: `Error: ${error}`,
-// 		});
-// 	});
-
-// 	child.stdout.setEncoding('utf8');
-// 	child.stderr.on('data', data => {
-// 		mainWindow.webContents.send('mainprocess-response', data);
-// 		console.log(data);
-// 	});
-
-// 	child.on('close', code => {
-// 		switch (code) {
-// 			case 0:
-// 				dialog.showMessageBox({
-// 					title: 'Title for case 0',
-// 					type: 'info',
-// 					message: 'End process',
-// 				});
-// 				break;
-// 		}
-// 	});
-
-// 	if (typeof callback === 'function') {
-// 		callback();
-// 	}
-// };
 
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
@@ -134,7 +96,7 @@ ipcMain.on('notify', (_, message) => {
 	new Notification({ title: 'Notification Test', body: message }).show();
 });
 
-// Node test
+// Node test - opens cmd prompt
 ipcMain.on('nodeTest', (_, args) => {
 	child_process.exec('start cmd.exe');
 	console.log(`Message from Renderer: ${args}`);
