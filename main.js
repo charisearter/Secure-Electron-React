@@ -93,7 +93,7 @@ ipcMain.handle('dialog:openNativeFile', handleNativeFileOpen);
 // 	new Notification({ title: 'Notification Test', body: message }).show();
 // });
 
-// Node test - opens cmd prompt
+// Node test
 ipcMain.on('nodeTest', (_, args) => {
 	child_process.exec('start cmd.exe');
 	console.log(`Message from Renderer: ${args}`);
