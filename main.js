@@ -10,11 +10,9 @@ const path = require('path');
 // Node test
 const child_process = require('child_process');
 
-
 // Check to see if in Development mode
 const isDev = !app.isPackaged;
 
-// make a global variable so it won't be garbage collected
 let mainWindow;
 
 // Show Dialog - Native
@@ -26,7 +24,6 @@ const handleNativeFileOpen = async () => {
 		return filePaths[0];
 	}
 };
-
 
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
@@ -77,24 +74,24 @@ app.on('activate', () => {
 // IPC events here
 
 // Say Hello
-ipcMain.handle('say-hello', (_, args) => {
-	console.log(args);
-	return `Hello from Main. This is app version ${app.getVersion()}.`;
-});
+// ipcMain.handle('say-hello', (_, args) => {
+// 	console.log(args);
+// 	return `Hello from Main. This is app version ${app.getVersion()}.`;
+// });
 
 // Send Message
-ipcMain.on('message', (_, args) => {
-	console.log(`The message sent to Main: ${args}`);
-});
+// ipcMain.on('message', (_, args) => {
+// 	console.log(`The message sent to Main: ${args}`);
+// });
 
 // Open file
 ipcMain.handle('dialog:openNativeFile', handleNativeFileOpen);
 
-// Notification pop up
-ipcMain.on('notify', (_, message) => {
-	console.log(`Notify Main process: ${message}`);
-	new Notification({ title: 'Notification Test', body: message }).show();
-});
+// // Notification pop up
+// ipcMain.on('notify', (_, message) => {
+// 	console.log(`Notify Main process: ${message}`);
+// 	new Notification({ title: 'Notification Test', body: message }).show();
+// });
 
 // Node test - opens cmd prompt
 ipcMain.on('nodeTest', (_, args) => {
