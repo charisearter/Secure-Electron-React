@@ -16,9 +16,9 @@ const API = {
 			ipcRenderer.invoke(channel, data);
 		}
 	},
-	// Main to Renderer (FFMPEG version uses this one to send message back from main)
+
 	receive: (channel, func) => {
-		let validChannels = [];
+		let validChannels = ['onCount', 'nodeTest'];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.on(channel, (_, ...args) => func(...args));
 		}

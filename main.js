@@ -8,7 +8,7 @@ const {
 const path = require('path');
 
 // Node test
-const child_process = require('child_process');
+const cp = require('child_process');
 
 // Check to see if in Development mode
 const isDev = !app.isPackaged;
@@ -36,6 +36,13 @@ const createWindow = () => {
 			preload: path.join(__dirname, 'preload.js'),
 		},
 	});
+
+	// Auto Counter test
+	let count = 0;
+
+	setInterval(() => {
+		mainWindow.webContents.send('count', count++);
+	}, 1000);
 
 	// show window if finished loading
 	mainWindow.on('ready-to-show', mainWindow.show);
@@ -95,6 +102,7 @@ ipcMain.handle('dialog:openNativeFile', handleNativeFileOpen);
 
 // Node test
 ipcMain.on('nodeTest', (_, args) => {
-	child_process.exec('start cmd.exe');
+	cp.exec('test.js');
+	//cp.exec('run ./modules/test.js');
 	console.log(`Message from Renderer: ${args}`);
 });

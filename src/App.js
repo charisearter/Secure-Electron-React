@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import NativeOpen from './components/NativeOpen';
+import Counter from './components/Counter';
 import NodeTest from './components/NodeTest';
 
 function App() {
 	//const [msg, setMsg] = useState('Initial message');
 	const [filePath, setFilePath] = useState([]);
+	const [count, setCount] = useState(0);
+
 	//const [path, setPath] = useState([]);
+
+	// counter Auto
+
+	window.api.receive('onCount', data => {
+		setCount(data);
+	});
 
 	// One-Way: Say Hello -  IPC renderer -> main
 	// const getGreeting = async () => {
@@ -25,9 +34,8 @@ function App() {
 
 	// Node Test
 	const testNode = () => {
-		api.send('nodeTest', `Renderer --> Main set up to test Node`);
+		api.send('nodeTest');
 	};
-
 	// Show Dialog - Naive Open file
 	const fileOpen = async () => {
 		const thePath = await window.api.openNativeFile();
@@ -42,9 +50,9 @@ function App() {
 
 	return (
 		<section>
-			<NativeOpen fileOpen={fileOpen} filePath={filePath} />
-
+			<Counter count={count} />
 			<NodeTest testNode={testNode} />
+			<NativeOpen fileOpen={fileOpen} filePath={filePath} />
 		</section>
 	);
 }
