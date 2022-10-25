@@ -1,14 +1,8 @@
-const {
-	app,
-	BrowserWindow,
-	ipcMain,
-	dialog,
-	Notification,
-} = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
 // Node test
-const cp = require('child_process');
+//const cp = require('child_process');
 
 // Check to see if in Development mode
 const isDev = !app.isPackaged;
@@ -28,7 +22,6 @@ const handleNativeFileOpen = async () => {
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
 		show: false, // don't show until finished loading
-		autoHideMenuBar: true, //hide default electron menu bar
 		resizable: false, // disallow user to resize window
 		width: 800,
 		height: 700,
@@ -39,11 +32,6 @@ const createWindow = () => {
 
 	// show window if finished loading
 	mainWindow.on('ready-to-show', mainWindow.show);
-
-	// if development open dev tools
-	// if (isDev) {
-	// 	mainWindow.webContents.openDevTools();
-	// }
 
 	// load UI window
 	mainWindow.loadFile('index.html');
@@ -102,6 +90,6 @@ ipcMain.on('nodeTest', (e, args) => {
 		'Main -> Renderer:\n Message response from Main'
 	);
 	console.log(
-		`Message from Renderer: Should call child process (Needs work): \n ${args}`
+		`Message from Renderer: Should call child process (Needs more work): \n ${args}`
 	);
 });
