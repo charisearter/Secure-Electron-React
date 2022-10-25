@@ -41,9 +41,9 @@ const createWindow = () => {
 	mainWindow.on('ready-to-show', mainWindow.show);
 
 	// if development open dev tools
-	if (isDev) {
-		mainWindow.webContents.openDevTools();
-	}
+	// if (isDev) {
+	// 	mainWindow.webContents.openDevTools();
+	// }
 
 	// load UI window
 	mainWindow.loadFile('index.html');
