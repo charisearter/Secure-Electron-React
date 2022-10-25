@@ -1,41 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NativeOpen from './components/NativeOpen';
-import Counter from './components/Counter';
 import NodeTest from './components/NodeTest';
 
 function App() {
-	//const [msg, setMsg] = useState('Initial message');
 	const [filePath, setFilePath] = useState([]);
-	const [count, setCount] = useState(0);
 
-	//const [path, setPath] = useState([]);
-
-	// counter Auto
-
-	window.api.receive('onCount', data => {
-		setCount(data);
+	// Message response Test
+	window.api.receive('test-succeeded', () => {
+		console.log('NodeTest - Response from main');
 	});
-
-	// One-Way: Say Hello -  IPC renderer -> main
-	// const getGreeting = async () => {
-	// 	await api.invoke('say-hello', 'This is another greeting: Sup!');
-	// 	console.log('Sent to Main - appears in Electron console');
-	// };
-
-	// Two-Way: Send Message - IPC renderer -> main --> renderer
-	// const sendMessage = () => {
-	// 	window.api.send('message', msg);
-	// };
-
-	// const onMsgChange = e => {
-	// 	e.preventDefault();
-	// 	setMsg(e.target.value);
-	// };
 
 	// Node Test
 	const testNode = () => {
-		api.send('nodeTest');
+		api.send('nodeTest', 'Testing');
 	};
+
 	// Show Dialog - Naive Open file
 	const fileOpen = async () => {
 		const thePath = await window.api.openNativeFile();
@@ -43,16 +22,10 @@ function App() {
 		setFilePath(thePath);
 	};
 
-	// Notify Pop up
-	// const sendNotification = () => {
-	// 	api.send('notify', 'You have been notified!');
-	// };
-
 	return (
 		<section>
-			<Counter count={count} />
-			<NodeTest testNode={testNode} />
 			<NativeOpen fileOpen={fileOpen} filePath={filePath} />
+			<NodeTest testNode={testNode} />
 		</section>
 	);
 }

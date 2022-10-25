@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 const API = {
 	// Renderer to Main (FFMPEG uses this one to send filePath to Main)
 	send: (channel, data) => {
-		let validChannels = ['message', 'notify', 'nodeTest'];
+		let validChannels = ['nodeTest'];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.send(channel, data);
 		}
@@ -18,7 +18,7 @@ const API = {
 	},
 
 	receive: (channel, func) => {
-		let validChannels = ['onCount', 'nodeTest'];
+		let validChannels = ['test-succeeded'];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.on(channel, (_, ...args) => func(...args));
 		}

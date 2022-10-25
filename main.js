@@ -37,13 +37,6 @@ const createWindow = () => {
 		},
 	});
 
-	// Auto Counter test
-	let count = 0;
-
-	setInterval(() => {
-		mainWindow.webContents.send('count', count++);
-	}, 1000);
-
 	// show window if finished loading
 	mainWindow.on('ready-to-show', mainWindow.show);
 
@@ -101,8 +94,14 @@ ipcMain.handle('dialog:openNativeFile', handleNativeFileOpen);
 // });
 
 // Node test
-ipcMain.on('nodeTest', (_, args) => {
-	cp.exec('test.js');
+ipcMain.on('nodeTest', (e, args) => {
+	// cp.exec('test.js');
 	//cp.exec('run ./modules/test.js');
-	console.log(`Message from Renderer: ${args}`);
+	e.sender.send(
+		'test-succeeded',
+		'Main -> Renderer:\n Message response from Main'
+	);
+	console.log(
+		`Message from Renderer: Should call child process (Needs work): \n ${args}`
+	);
 });
