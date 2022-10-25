@@ -4,6 +4,18 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
+	"build": {
+		"mac": {
+			"icon": "./build/icon.icns"
+		},
+		"win": {
+			"target": "zip",
+			"icon": "./build/icon.ico"
+		},
+		"linux": {
+			"icon": "./build/icon.png"
+		}
+	},
 	"devDependencies": {
 		"@babel/core": "^7.19.3",
 		"@babel/preset-env": "^7.19.3",
