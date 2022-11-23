@@ -38,7 +38,6 @@ const createWindow = () => {
 	if (isDevelopment) {
 		mainWindow.loadURL('http://localhost:40992');
 	} else {
-		console.log('production');
 		mainWindow.loadFile('src/dist/index.html');
 	}
 };
