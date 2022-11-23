@@ -1,9 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 const API = {
-	// Renderer to Main (FFMPEG uses this one to send filePath to Main)
+	// Renderer to Main
 	send: (channel, data) => {
-		let validChannels = ['nodeTest'];
+		let validChannels = [];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.send(channel, data);
 		}
@@ -11,14 +11,15 @@ const API = {
 
 	// Bi-directional
 	invoke: (channel, data) => {
-		let validChannels = ['say-hello'];
+		let validChannels = [];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.invoke(channel, data);
 		}
 	},
 
+	// Main to renderer
 	receive: (channel, func) => {
-		let validChannels = ['test-succeeded'];
+		let validChannels = [];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.on(channel, (_, ...args) => func(...args));
 		}

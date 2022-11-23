@@ -2,7 +2,7 @@
 	"name": "secure-electron-react",
 	"description": "A more secure electron react app",
 	"version": "1.0.0",
-	"main": "main.js",
+	"main": "src/main/main.js",
 	"private": true,
 	"scripts": {
 		"dev-server": "webpack serve --mode development --config ./webpack.development.js",
