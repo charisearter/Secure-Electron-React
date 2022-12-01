@@ -2,9 +2,6 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-// Check to see if in Development mode
-const isDev = !app.isPackaged;
-
 let mainWindow;
 
 // Show Dialog - Native
