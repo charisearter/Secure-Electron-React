@@ -5,8 +5,8 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow;
 
 // Show Dialog - Native
-const handleNativeFileOpen = async () => {
-	const { canceled, filePaths } = await dialog.showOpenDialog();
+const handleNativeFileOpen = async (options) => {
+	const { canceled, filePaths } = await dialog.showOpenDialog(options);
 	if (canceled) {
 		return;
 	} else {
@@ -32,11 +32,7 @@ const createWindow = () => {
 	});
 
 	// Load our HTML file
-	if (isDevelopment) {
-		mainWindow.loadURL('http://localhost:40992');
-	} else {
-		mainWindow.loadFile('src/dist/index.html');
-	}
+	mainWindow.loadFile('src/dist/index.html');
 };
 
 app.whenReady().then(createWindow);
