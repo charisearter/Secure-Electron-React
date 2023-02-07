@@ -5,8 +5,8 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow;
 
 // Show Dialog - Native
-const handleNativeFileOpen = async (options) => {
-	const { canceled, filePaths } = await dialog.showOpenDialog(options);
+const handleNativeFileOpen = async () => {
+	const { canceled, filePaths } = await dialog.showOpenDialog();
 	if (canceled) {
 		return;
 	} else {

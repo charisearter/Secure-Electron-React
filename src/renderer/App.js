@@ -13,7 +13,7 @@ function App() {
 		properties: ['openFile'],
 	};
 
-	// Show Dialog - Naive Open file
+	// Show Dialog - Native Open file
 	const fileOpen = async () => {
 		const thePath = await window.api.openNativeFile(options);
 		if (!thePath) {
