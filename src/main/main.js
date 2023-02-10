@@ -15,6 +15,7 @@ const handleNativeFileOpen = async ({ defaultPath }) => {
 	} else {
 		options.defaultPath = path.dirname(filePaths[0]);
 		console.log(`Default Path: ${options.defaultPath}`);
+		console.log(options);
 		return filePaths[0];
 	}
 };
