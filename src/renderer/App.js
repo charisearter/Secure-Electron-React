@@ -1,30 +1,20 @@
 import React, { useState } from 'react';
 import NativeOpen from './components/NativeOpen';
-import usePrevious from './hooks/usePrevious';
 
 function App() {
 	const [filePath, setFilePath] = useState([]);
-	const prevPathSrc = usePrevious(filePath);
-	const [prevSrc, setPrevSrc] = useState('');
-
-	// options
-	let options = {
-		defaultPath: filePath && filePath.length > 0 ? filePath : prevPathSrc,
-		properties: ['openFile'],
-	};
+	const [parentDir, setParentDir] = useState('');
 
 	// Show Dialog - Native Open file
 	const fileOpen = async () => {
-		const thePath = await window.api.openNativeFile(options);
+		const thePath = await window.api.openNativeFile(parentDir);
 		if (!thePath) {
 			return;
 		}
 		console.log('Length of Path: ', thePath.length);
 		setFilePath(thePath);
-		setPrevSrc(options.defaultPath);
-		console.log(`Render - default: ${options.defaultPath}`);
-		console.log(`Render - Prev PATH src: ${prevPathSrc}`);
-		console.log(`Render - Prev source: ${prevSrc}`);
+
+		console.log(`Render - default: ${parentDir}`);
 	};
 
 	return (
@@ -32,8 +22,7 @@ function App() {
 			<NativeOpen
 				fileOpen={fileOpen}
 				filePath={filePath}
-				prevSrc={prevSrc}
-				prevPathSrc={prevPathSrc}
+				parentDir={parentDir}
 			/>
 		</section>
 	);

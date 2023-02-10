@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NativeOpen({ fileOpen, filePath, prevSrc, prevPathSrc }) {
+function NativeOpen({ fileOpen, filePath, parentDir }) {
 	return (
 		<div>
 			<h2>Open File and Show Path - Native</h2>
@@ -9,14 +9,9 @@ function NativeOpen({ fileOpen, filePath, prevSrc, prevPathSrc }) {
 				File path: <strong> {filePath} </strong>
 			</p>
 			<p>
-				Prev Src: <em> {prevSrc}</em>
+				Parent: <em> {parentDir}</em>
 			</p>
-			<p>
-				Prev Src Path:
-				<em>
-					<strong>{prevPathSrc} </strong>
-				</em>
-			</p>
+
 			<hr />
 		</div>
 	);

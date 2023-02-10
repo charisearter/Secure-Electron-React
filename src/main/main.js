@@ -5,11 +5,16 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow;
 
 // Show Dialog - Native
-const handleNativeFileOpen = async () => {
-	const { canceled, filePaths } = await dialog.showOpenDialog();
+const handleNativeFileOpen = async ({ defaultPath }) => {
+	const options = {
+		defaultPath: defaultPath,
+	};
+	const { canceled, filePaths } = await dialog.showOpenDialog(options);
 	if (canceled) {
 		return;
 	} else {
+		options.defaultPath = path.dirname(filePaths[0]);
+		console.log(`Default Path: ${options.defaultPath}`);
 		return filePaths[0];
 	}
 };
